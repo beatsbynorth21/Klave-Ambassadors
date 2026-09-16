@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KLAVE Ambassadors</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,500;9..144,600&family=Work+Sans:wght@400;500;600&display=swap');
+
+  :root{
+    --bg: #12100D;
+    --paper: #F4EEE2;
+    --amber: #D98F3E;
+    --taupe: #7A6F5E;
+    --rust: #8B3A2B;
+    --line: rgba(244,238,226,0.14);
+  }
+
+  *{ box-sizing: border-box; margin:0; padding:0; }
+
+  html{ scroll-behavior: smooth; }
+
+  body{
+    background: var(--bg);
+    color: var(--paper);
+    font-family: 'Work Sans', sans-serif;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  a{ color: inherit; }
+
+  .wrap{
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 0 28px;
+  }
+
+  header.top{
+    padding: 28px 0 0;
+  }
+  .wordmark{
+    font-family: 'Fraunces', serif;
+    font-weight: 600;
+    font-size: 1.15rem;
+    letter-spacing: 0.01em;
+  }
+
+  /* ---- Hero: waveform ---- */
+  .hero{
+    padding: 56px 0 40px;
+  }
+  .wave{
+    display: flex;
+    align-items: flex-end;
+    gap: 3px;
+    height: 84px;
+    margin-bottom: 34px;
+  }
+  .wave span{
+    flex: 1;
+    background: var(--amber);
+    border-radius: 2px 2px 0 0;
+    opacity: 0.85;
+  }
+  .wave span:nth-child(3n){ background: var(--rust); opacity: 0.9; }
+
+  h1{
+    font-family: 'Fraunces', serif;
+    font-weight: 500;
+    font-size: clamp(2.1rem, 7vw, 3.1rem);
+    line-height: 1.08;
+    letter-spacing: -0.01em;
+    max-width: 11ch;
+  }
+
+  .lede{
+    margin-top: 22px;
+    max-width: 46ch;
+    font-size: 1.05rem;
+    color: #DCD4C4;
+  }
+
+  .lede b{ color: var(--paper); font-weight: 600; }
+
+  /* ---- CTA ---- */
+  .cta-row{
+    margin-top: 32px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+  .btn{
+    display: inline-block;
+    background: var(--amber);
+    color: #1A1610;
+    font-weight: 600;
+    font-size: 0.98rem;
+    padding: 14px 26px;
+    border-radius: 4px;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+  }
+  .btn:active{ transform: translateY(1px); }
+  .cta-note{
+    font-size: 0.85rem;
+    color: var(--taupe);
+  }
+
+  .ref-box{
+    display: flex;
+    gap: 8px;
+    width: 100%;
+    max-width: 420px;
+    flex-wrap: wrap;
+  }
+  .ref-input{
+    flex: 1;
+    min-width: 180px;
+    background: transparent;
+    border: 1px solid var(--line);
+    color: var(--paper);
+    font-family: 'Work Sans', sans-serif;
+    font-size: 0.95rem;
+    padding: 13px 14px;
+    border-radius: 4px;
+  }
+  .ref-input::placeholder{ color: var(--taupe); }
+  .ref-input:focus{ outline: none; border-color: var(--amber); }
+  .ref-generate{ flex-shrink: 0; }
+
+  .ref-result{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    background: rgba(217,143,62,0.08);
+    border: 1px solid rgba(217,143,62,0.3);
+    border-radius: 4px;
+    padding: 12px 14px;
+    max-width: 480px;
+  }
+  .ref-url{
+    font-size: 0.9rem;
+    color: var(--paper);
+    word-break: break-all;
+    flex: 1;
+    min-width: 160px;
+  }
+  .ref-copy{
+    background: transparent;
+    border: 1px solid var(--amber);
+    color: var(--amber);
+    font-weight: 600;
+    font-size: 0.85rem;
+    padding: 8px 14px;
+    border-radius: 4px;
+    cursor: pointer;
+    flex-shrink: 0;
+  }
+  .ref-copy:active{ transform: translateY(1px); }
+  .ref-copy.copied{ background: var(--amber); color: #1A1610; }
+
+  /* ---- Section rule ---- */
+  .rule{
+    border: none;
+    border-top: 1px solid var(--line);
+    margin: 52px 0;
+  }
+
+  h2{
+    font-family: 'Fraunces', serif;
+    font-weight: 500;
+    font-size: 1.55rem;
+    margin-bottom: 8px;
+  }
+  .section-note{
+    color: var(--taupe);
+    font-size: 0.95rem;
+    max-width: 42ch;
+    margin-bottom: 30px;
+  }
+
+  /* ---- How it works ---- */
+  .steps{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  .step{
+    display: flex;
+    gap: 16px;
+    align-items: baseline;
+  }
+  .step .n{
+    font-family: 'Fraunces', serif;
+    font-size: 1.3rem;
+    color: var(--amber);
+    width: 1.4em;
+    flex-shrink: 0;
+  }
+  .step p{ color: #DCD4C4; font-size: 0.98rem; }
+  .step strong{ color: var(--paper); }
+
+  /* ---- Reward ladder (progressive waveform) ---- */
+  .ladder{
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+  .rung{
+    display: grid;
+    grid-template-columns: 56px 1fr;
+    align-items: center;
+    gap: 18px;
+    padding: 18px 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .rung:first-child{ border-top: 1px solid var(--line); }
+  .rung-bar-track{
+    height: 6px;
+    background: rgba(244,238,226,0.08);
+    border-radius: 3px;
+    overflow: hidden;
+  }
+  .rung-bar{
+    height: 100%;
+    background: var(--amber);
+    border-radius: 3px;
+  }
+  .rung-count{
+    font-family: 'Fraunces', serif;
+    font-size: 1.6rem;
+    color: var(--paper);
+    line-height: 1;
+  }
+  .rung-count span{
+    display: block;
+    font-family: 'Work Sans', sans-serif;
+    font-size: 0.72rem;
+    color: var(--taupe);
+    margin-top: 2px;
+    font-weight: 500;
+  }
+  .rung-reward{
+    font-size: 0.97rem;
+    color: #DCD4C4;
+  }
+  .rung-reward strong{ color: var(--paper); }
+  .rung.founding .rung-count{ color: var(--rust); }
+
+  /* ---- Who it's for ---- */
+  .who{
+    color: #DCD4C4;
+    font-size: 1.02rem;
+    max-width: 48ch;
+  }
+  .who b{ color: var(--paper); }
+
+  /* ---- Footer CTA ---- */
+  footer{
+    padding: 60px 0 48px;
+    text-align: left;
+  }
+  footer .lede{ margin-bottom: 26px; }
+
+  footer .fine{
+    margin-top: 40px;
+    font-size: 0.82rem;
+    color: var(--taupe);
+  }
+
+  @media (max-width: 420px){
+    .wrap{ padding: 0 20px; }
+    .rung{ grid-template-columns: 44px 1fr; gap: 14px; }
+  }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <div class="wordmark">KLAVE</div>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <div class="wave" id="wave"></div>
+    <h1>You don't need to make beats to help build this.</h1>
+    <p class="lede">
+      KLAVE is a marketplace for <b>100% human-made beats</b> — verified, no AI-generated stems, real producers paid fairly. We're opening it up before launch, and we need people who believe in that to help spread it.
+    </p>
+    <div class="cta-row">
+      <a href="#join" class="btn">Become an ambassador</a>
+      <span class="cta-note">Takes 30 seconds. No KLAVE account needed.</span>
+    </div>
+  </div>
+</section>
+
+<div class="wrap"><hr class="rule"></div>
+
+<section>
+  <div class="wrap">
+    <h2>How it works</h2>
+    <p class="section-note">One link. Share it however you already talk to people — DMs, group chats, your page.</p>
+    <div class="steps">
+      <div class="step">
+        <span class="n">1</span>
+        <p><strong>Grab your link</strong> — every ambassador gets one unique referral code, tracked to you.</p>
+      </div>
+      <div class="step">
+        <span class="n">2</span>
+        <p><strong>Share it with anyone</strong> — producers, artists, fans, friends. It works the same for all of them.</p>
+      </div>
+      <div class="step">
+        <span class="n">3</span>
+        <p><strong>They join, you both get rewarded</strong> — the more people you bring in, the more you unlock.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="wrap"><hr class="rule"></div>
+
+<section>
+  <div class="wrap">
+    <h2>What you get</h2>
+    <p class="section-note">Rewards scale with referrals — the same ladder whether you make beats or just love them.</p>
+    <div class="ladder">
+      <div class="rung">
+        <div class="rung-count">5<span>%</span></div>
+        <div class="rung-reward"><strong>Any referral —</strong> you earn 5% of every sale made by someone you brought in. For life.</div>
+      </div>
+      <div class="rung">
+        <div class="rung-count">10<span>%</span></div>
+        <div class="rung-reward"><strong>5 referrals —</strong> your cut jumps to 10%, plus early access to NERO before it opens to everyone else.</div>
+      </div>
+      <div class="rung founding">
+        <div class="rung-count">15<span>%</span></div>
+        <div class="rung-reward"><strong>10 referrals —</strong> your cut jumps to 15%, plus a permanent Founding Ambassador badge on your profile.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="wrap"><hr class="rule"></div>
+
+<section>
+  <div class="wrap">
+    <h2>Who this is for</h2>
+    <p class="who">
+      <b>Anyone.</b> Producers tired of marketplaces flooded with AI-generated stems. Artists who want real collaborators. Fans who just want more human-made music in the world. If that's you, you're already an ambassador — you just don't have the link yet.
+    </p>
+  </div>
+</section>
+
+<section id="join">
+  <div class="wrap">
+    <hr class="rule" style="margin-top:0;">
+    <h2>Become an ambassador</h2>
+    <p class="section-note">Give us your name and email — we'll set up your referral code. No KLAVE account required.</p>
+
+    <div class="ref-box" id="joinBox">
+      <input type="text" class="ref-input" id="joinName" placeholder="Your name" maxlength="40">
+      <input type="email" class="ref-input" id="joinEmail" placeholder="Your email" maxlength="60">
+      <button class="btn" id="joinBtn">Join &amp; get my link</button>
+    </div>
+    <div id="joinError" style="color:var(--rust); font-size:0.85rem; margin-top:8px;"></div>
+
+    <div class="ref-result" id="joinResult" style="display:none; margin-top:18px;">
+      <span class="ref-url" id="joinUrl"></span>
+      <button class="ref-copy" id="joinCopyBtn">Copy</button>
+    </div>
+
+    <div id="bankSection" style="display:none; margin-top:32px;">
+      <hr class="rule" style="margin:0 0 24px;">
+      <h2 style="font-size:1.2rem;">Where should commissions go?</h2>
+      <p class="section-note">Add your bank details once, so we can pay your commission directly when it's ready.</p>
+      <div class="ref-box">
+        <select id="bankSelect" class="ref-input">
+          <option value="">Loading banks…</option>
+        </select>
+        <input type="text" class="ref-input" id="bankAccountNumber" inputmode="numeric" maxlength="10" placeholder="10-digit account number">
+        <button class="btn" id="verifyBankBtn">Verify &amp; save</button>
+      </div>
+      <div id="bankStatus" style="font-size:0.9rem; color:var(--taupe); margin-top:10px;"></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <hr class="rule" style="margin-top:0;">
+    <p class="fine">KLAVE — human-made beats, verified.</p>
+  </div>
+</footer>
+
+<script>
+  // Generate a natural, uneven waveform for the hero
+  const wave = document.getElementById('wave');
+  const heights = [22,38,54,30,70,45,84,60,35,50,28,66,42,58,25,48,72,33,55,20];
+  heights.forEach(h => {
+    const bar = document.createElement('span');
+    bar.style.height = h + '%';
+    wave.appendChild(bar);
+  });
+
+  // Referral link generation — backed by a real waitlist entry (see
+  // /api/join-waitlist.js) instead of a client-side-only slugified name.
+  // The link points to the KLAVE app itself (not back to this page) — that's
+  // where the ?ref= code actually gets captured and eventually credited,
+  // since commissions only trigger off real KLAVE signups and sales.
+  const KLAVE_URL = 'https://klaveapp.vercel.app';
+
+  let myCode = localStorage.getItem('klave_ambassador_code') || null;
+
+  function buildLink(code){
+    return `${KLAVE_URL}/?ref=${code}`;
+  }
+
+  function showResult(code){
+    myCode = code;
+    localStorage.setItem('klave_ambassador_code', code);
+    document.getElementById('joinResult').style.display = 'flex';
+    document.getElementById('joinUrl').textContent = buildLink(code);
+    document.getElementById('joinBox').style.display = 'none';
+    document.getElementById('bankSection').style.display = 'block';
+    loadBankListForAmbassador();
+  }
+
+  // If they already joined on a previous visit, skip straight to the result.
+  if (myCode) {
+    showResult(myCode);
+  }
+
+  document.getElementById('joinBtn').addEventListener('click', async () => {
+    const name = document.getElementById('joinName').value.trim();
+    const email = document.getElementById('joinEmail').value.trim();
+    const errorEl = document.getElementById('joinError');
+    errorEl.textContent = '';
+
+    if (!name || !email.includes('@')) {
+      errorEl.textContent = 'Enter your name and a valid email.';
+      return;
+    }
+
+    const btn = document.getElementById('joinBtn');
+    btn.disabled = true;
+    btn.textContent = 'Joining…';
+
+    try {
+      const r = await fetch(`/api/join-waitlist`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, email }),
+      });
+      const data = await r.json();
+      if (!r.ok) throw new Error(data.error || 'Something went wrong');
+      showResult(data.code);
+    } catch (e) {
+      errorEl.textContent = e.message;
+    } finally {
+      btn.disabled = false;
+      btn.textContent = "Join & get my link";
+    }
+  });
+
+  document.getElementById('joinCopyBtn').addEventListener('click', () => {
+    const url = document.getElementById('joinUrl').textContent;
+    navigator.clipboard.writeText(url).then(() => {
+      const btn = document.getElementById('joinCopyBtn');
+      btn.textContent = 'Copied';
+      btn.classList.add('copied');
+    });
+  });
+
+  // ── Bank details (optional, shown once they've joined) ──
+  let _banksLoaded = false;
+  async function loadBankListForAmbassador(){
+    if (_banksLoaded) return;
+    const select = document.getElementById('bankSelect');
+    try {
+      const r = await fetch(`/api/list-banks`);
+      const data = await r.json();
+      select.innerHTML = '<option value="">Select your bank</option>'
+        + data.banks.map(b => `<option value="${b.code}">${b.name}</option>`).join('');
+      _banksLoaded = true;
+    } catch (e) {
+      select.innerHTML = '<option value="">Could not load banks — try again later</option>';
+    }
+  }
+
+  document.getElementById('verifyBankBtn').addEventListener('click', async () => {
+    const bankCode = document.getElementById('bankSelect').value;
+    const accountNumber = document.getElementById('bankAccountNumber').value.trim();
+    const statusEl = document.getElementById('bankStatus');
+    const bankName = document.getElementById('bankSelect').selectedOptions[0]?.text;
+
+    if (!bankCode || accountNumber.length < 10) {
+      statusEl.textContent = 'Select a bank and enter a valid account number.';
+      return;
+    }
+
+    statusEl.textContent = 'Verifying…';
+    try {
+      const resolveRes = await fetch(`/api/resolve-account`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ accountNumber, bankCode }),
+      });
+      const resolveData = await resolveRes.json();
+      if (!resolveRes.ok) throw new Error(resolveData.error || 'Verification failed');
+
+      const saveRes = await fetch(`/api/save-waitlist-bank`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          code: myCode,
+          accountNumber: resolveData.accountNumber,
+          bankCode,
+          bankName,
+          accountName: resolveData.accountName,
+        }),
+      });
+      const saveData = await saveRes.json();
+      if (!saveRes.ok) throw new Error(saveData.error || 'Could not save bank details');
+
+      statusEl.textContent = '✓ ' + resolveData.accountName + ' — saved.';
+    } catch (e) {
+      statusEl.textContent = 'Could not verify: ' + e.message;
+    }
+  });
+</script>
+
+</body>
+</html>
